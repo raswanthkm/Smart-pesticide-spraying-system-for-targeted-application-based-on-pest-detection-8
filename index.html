@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PestSense • Leaf & Plant Pest Detector</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier@1.2.5/dist/knn-classifier.min.js"></script>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🪴</div>
+      <div class="titles">
+        <h1>PestSense</h1>
+        <p>On-device pest detection & guidance</p>
+      </div>
+    </div>
+    <a class="gh" href="https://github.com/" target="_blank" rel="noopener">Open on GitHub</a>
+  </header>
+  <main class="shell">
+    <section class="panel glass">
+      <h2 class="panel-title">1) Model Status</h2>
+      <div id="status" class="status">Loading MobileNet…</div>
+      <div id="trainbar" class="progress hidden"><div id="trainbarFill" class="progress-fill"></div></div>
+      <ul class="legend">
+        <li><span class="chip pest">Pest</span> aphids, flea beetles, caterpillars</li>
+        <li><span class="chip ok">No Pest</span> healthy leaves/plants</li>
+      </ul>
+    </section>
+    <section class="panel glass">
+      <h2 class="panel-title">2) Upload or Drag & Drop a Photo</h2>
+      <label id="drop" class="drop">
+        <input id="file" type="file" accept="image/*" hidden />
+        <div class="drop-inner">
+          <div class="drop-cta">Drop image here or <span>browse</span></div>
+          <div class="drop-hint">Clear & close-up photos give best results.</div>
+        </div>
+        <img id="preview" class="preview hidden" alt="preview" />
+      </label>
+      <div class="actions">
+        <button id="analyzeBtn" class="btn" disabled>Analyze</button>
+        <button id="resetBtn" class="btn ghost" disabled>Reset</button>
+      </div>
+    </section>
+    <section class="panel glass">
+      <h2 class="panel-title">3) Result</h2>
+      <div id="result" class="result idle">
+        <div class="bigline">Waiting for image…</div>
+        <div class="smallline">The analysis will appear here.</div>
+      </div>
+      <div id="recBox" class="rec hidden">
+        <h3>Suggested Treatment</h3>
+        <div id="recText"></div>
+        <div class="note">Use responsibly. Prefer targeted, eco-safe options first.</div>
+      </div>
+    </section>
+  </main>
+  <footer class="foot"><div>Runs entirely in your browser • No uploads • MIT License</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
